@@ -1,0 +1,59 @@
+server:
+  port: 8555
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: test
+  application:
+    name: TaskManager
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize:   20
+      auto-commit: false
+      minimum-idle: 3
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 5
+        order_inserts: true
+        order_updates: true
+        query:
+          plan_cache_max_size: 2048
+          plan_parameter_metadata_max_size: 128
+
+        connection:
+          provider_disables_autocommit: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: false
+    open-in-view: false
+
+logging:
+  level:
+    org.springframework: debug
+    com.cardinality.taskmanager: info
+
+jwt:
+  secret: cardinalityjwttestsecret20210829
+
+
+springdoc:
+  api-docs:
+    path: /api/docs/api-doc
+  swagger-ui:
+    path: /api/docs/swagger-ui.html
+
+
+
+

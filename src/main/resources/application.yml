@@ -1,0 +1,63 @@
+server:
+  port: 8070
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: TaskManager
+
+  datasource:
+    username: root
+    password: password
+    url: jdbc:mysql://localhost:3306/task_manager
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize:   20
+      auto-commit: false
+      minimum-idle: 3
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 5
+        order_inserts: true
+        order_updates: true
+        query:
+          plan_cache_max_size: 2048
+          plan_parameter_metadata_max_size: 128
+
+        connection:
+          provider_disables_autocommit: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: false
+    open-in-view: false
+
+logging:
+  level:
+    org.springframework: debug
+    com.cardinality.taskmanager: info
+
+jwt:
+  secret: cardinalityjwtsecret20210829
+
+
+springdoc:
+  api-docs:
+    path: /api/docs/api-doc
+  swagger-ui:
+    path: /api/docs/swagger-ui.html
+
+
+
+

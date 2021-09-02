@@ -1,0 +1,2 @@
+INSERT INTO `user` (created_by,created_date,last_modified_by,last_modified_date,full_name,password,`role`,user_name) VALUES
+	 ('SYSTEM',now(),NULL,now(),'Admin','$2a$10$iHP.kO6XlGuVHR3BEmKT7ue/Fzi2UTlHFP48yYnPGEZAXNdobUzCW','ADMIN','admin');
