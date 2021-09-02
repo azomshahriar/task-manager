@@ -34,27 +34,30 @@ API Doc:
 
 #Sample Rest Request:
 
-Admin Login:
+##Admin Login:
 
 Url: localhost:8070/api/v1/authenticate
 
 Method:POST
 
 Request Body:
+
 {
     "username":"admin",
     "password":"87654321"
 }
 
-NB: All request need header: Authentiation: Bearer:<token>.
+##NB: 
+All request need header: Authentiation: Bearer:<token>.
     
 User can also pass language header: Accept-Language:en/bn
 
-Create a Task:
+##Create a Task:
 URL: localhost:8070/api/v1/task
 Method: POST
     
 Request:
+    
 {
     "description":"Sample Task",
     "dueDate":"2021-09-10T00:00:00.00Z",
@@ -62,7 +65,8 @@ Request:
     "status":"OPEN"
 }
 
-Task Search:
+##Task Search:
+    
 URL:localhost:8070/api/v1/task/search?expired=true
 
 
