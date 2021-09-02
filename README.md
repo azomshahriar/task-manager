@@ -80,16 +80,16 @@ URL:localhost:8070/api/v1/task/search?expired=true
     url: jdbc:mysql://localhost:3306/task_manager?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
 
 
-    Future Improvement:
+    ### More Improvement notes for performance, scalability & maintainability:
 - Add more test cases.
 - Add distributed tracing and custom distributed tracin
 - Distributed cache(redis/memcache)
 - Store change event(task, project) history
 - Add centralized logging feature
-- docker image and docker build
+- docker file for docker image build
 - docker compose with mysql db
 - DB migration FlyWay
-- implement Idempotent operation using idempotent key
+- Implement Idempotent operation using idempotent key
 - Code quality(sonar quebe)  and code style check    
 - CI/CD pipeline
     
