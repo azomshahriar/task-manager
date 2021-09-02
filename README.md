@@ -88,6 +88,10 @@ URL:localhost:8070/api/v1/task/search?expired=true
 - docker compose with mysql db
 - DB migration FlyWay
 - implement Idempotent operation using idempotent key
+- Code quality(sonar quebe)  and code style check    
+- CI/CD pipeline
+    
+    
     
     
     
