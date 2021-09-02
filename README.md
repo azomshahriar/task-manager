@@ -82,7 +82,9 @@ URL:localhost:8070/api/v1/task/search?expired=true
 
     Future Improvement:
 - Add more test cases.
-- Add distributed tracing and custom distributed tracing
+- Add distributed tracing and custom distributed tracin
+- Distributed cache(redis/memcache)
+- Store change event(task, project) history
 - Add centralized logging feature
 - docker image and docker build
 - docker compose with mysql db
