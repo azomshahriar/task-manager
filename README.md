@@ -4,9 +4,9 @@ This is sample task-management project. This service also can be used as micro s
 
 Dependency of this project:
 - Java 11
-- MySql Server
-- Spring boot 2.5
-- maven
+- MySQL DB Server
+- Spring boot 2.5.4
+- Maven
 
 This is a demo of
     - basic Spring boot project
