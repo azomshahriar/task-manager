@@ -15,6 +15,7 @@ This is a demo of
     - Messaging Internationalization
     - Basic Unit,Integration and System testing
     - annotation based input validation
+    - audit info using spring security
 
 How to test:
   - mvn test
