@@ -21,19 +21,18 @@ How ot build:
   - mvn clean verify
 
 How to run:
-  - to run the project you need mysql server and set up mysql user/pass at application.yml or any environment
-  - then build the project using command: mvn clean verify
-  - there will be a jar file at target folder
-  - run the jar file following command: java -jar target/task-manager-0.0.1-SNAPSHOT.jar
+  - To run the project you need mysql server and set up mysql user/pass at application.yml or any other environment
+  - Build the project using command: mvn clean verify 
+  - Run the jar file following command: java -jar target/task-manager-0.0.1-SNAPSHOT.jar
   - Then you can access the application at http://localhost:8080/
-  - at start up of the application there is a default admin user/pass(admin:87654321), using this credential admin
-  user can create user.
+  - At the start up of the application default admin user/pass(admin:87654321) will be created at DB, using this credential admin
+  user can create other user.
 
 API Doc:
- - you will find all api definition at http://localhost:8080/swagger-ui/index.html
+ - All api definitions are available at http://localhost:8080/swagger-ui/index.html
 
 
- Sample Rest Request:
+**Sample Rest Request:**
 
 Admin Login:
 Url: localhost:8070/api/v1/authenticate
@@ -63,7 +62,7 @@ URL:localhost:8070/api/v1/task/search?expired=true
 
 
 
-##sample data source config
+##data source config
  datasource:
     username: root
     password: password
@@ -77,3 +76,5 @@ Future Improvement:
 - docker compose with mysql db
 - DB migration FlyWay
 - implement Idempotent operation using idempotent key
+    
+    Thanks and Stay Safe.
