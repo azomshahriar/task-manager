@@ -1,3 +1,5 @@
+
+# Task Manager REST API
 This is sample task-management project. This service also can be used as micro service component by introducing central auth.
 
 Dependency of this project:
@@ -32,9 +34,9 @@ API Doc:
  - All api definitions are available at http://localhost:8070/swagger-ui/index.html
 
 
-# Sample Rest Request:
+## Sample Rest Request:
 
-## Admin Login:
+### Admin Login:
 
 Url: localhost:8070/api/v1/authenticate
 
@@ -47,12 +49,12 @@ Request Body:
     "password":"87654321"
 }
 
-## NB: 
+### NB: 
 All request need header: Authentiation: Bearer:<token>
     
 User can also pass language header: Accept-Language:en/bn
 
-## Create a Task:
+### Create a Task:
 URL: localhost:8070/api/v1/task
 Method: POST
     
@@ -65,17 +67,17 @@ Request:
     "status":"OPEN"
 }
 
-## Task Search:
+### Task Search:
     
 URL:localhost:8070/api/v1/task/search?expired=true
 
 
 
-### data source config
+### datasource config
  datasource:
     username: root
     password: password
-    url: jdbc:mysql://localhost:3306/task_manager
+    url: jdbc:mysql://localhost:3306/task_manager?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
 
 
     Future Improvement:
