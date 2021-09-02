@@ -84,16 +84,18 @@ URL:localhost:8070/api/v1/task/search?expired=true
 
 ## More Improvement notes for performance, scalability & maintainability:
 - Add more test cases.
-- Add distributed tracing and custom distributed tracin
-- Distributed cache(redis/memcache)
+- Add distributed tracing
+- Distributed cache(redis/memcache) to improve performance
+- implement CQRS and separate independent read from MySQL read replica.    
 - Store change event(task, project) history
-- Add centralized logging feature
+- Add centralized logging feature(using ELK)
 - docker file for docker image build
 - docker compose with mysql db
+- Add script(deployment, service, ingress file) for k8 deployment    
 - DB migration FlyWay
 - Implement Idempotent operation using idempotent key
-- Code quality(sonar quebe)  and code style check    
-- CI/CD pipeline
+- Code quality check(sonar quebe)  and code style check    
+- incorporate CI/CD pipeline
     
     
     
