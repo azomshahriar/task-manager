@@ -1,4 +1,4 @@
-This is sample task-management component. This service also can be used as micro service component by introducing central auth.
+This is sample task-management project. This service also can be used as micro service component by introducing central auth.
 
 Dependency of this project:
 - Java 11
