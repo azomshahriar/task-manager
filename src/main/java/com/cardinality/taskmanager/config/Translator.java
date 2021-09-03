@@ -13,6 +13,7 @@ public class Translator {
 
     @Autowired
     CustomLocaleResolver customLocaleResolver;
+
     @Autowired
     Translator(ResourceBundleMessageSource messageSource) {
         Translator.messageSource = messageSource;

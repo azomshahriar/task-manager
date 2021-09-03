@@ -1,5 +1,6 @@
 package com.cardinality.taskmanager.exception;
 
+import com.cardinality.taskmanager.config.Translator;
 import com.cardinality.taskmanager.util.TaskManErrors;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
+            errors.put(fieldName, Translator.toLocale(errorMessage));
         });
         log.error("Exception",ex);
         return new ErrorResponse(

@@ -1,5 +1,6 @@
 package com.cardinality.taskmanager.dto;
 
+import com.cardinality.taskmanager.config.Translator;
 import com.cardinality.taskmanager.entity.Project;
 import com.cardinality.taskmanager.entity.Task.Status;
 import java.time.Instant;
@@ -20,10 +21,10 @@ public class TaskDto {
 
     private Long id;
 
-    @NotBlank(message = "Task description can't be blank")
+    @NotBlank(message = "taskDto.blank.description")
     private String description;
 
-    @NotNull(message = "Task Status can't be null")
+    @NotNull(message = "status.blank")
     private Status status;
 
     @NotNull(message ="Task must me under a project" )

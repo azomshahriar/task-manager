@@ -1,6 +1,8 @@
 package com.cardinality.taskmanager.config;
 
 import com.cardinality.taskmanager.repository.UserRepository;
+import javax.annotation.PostConstruct;
+import javax.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
