@@ -59,7 +59,7 @@ User can also pass language header: Accept-Language:en/bn
 URL: http://localhost:8070/api/v1/task
 Method: POST
     
- Request:-
+ Request:
     
 {
     "description":"Sample Task",
@@ -74,7 +74,7 @@ URL:http://localhost:8070/api/v1/task/search?expired=true
 
 
 
-### datasource config
+### datasource config:
  datasource:
     username: root
     password: password
