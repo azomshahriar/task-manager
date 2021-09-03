@@ -28,9 +28,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
-
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
     @Override
@@ -55,7 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } else {
             log.warn("JWT Token does not begin with Bearer String");
         }
-        // todo store role info at token so that don't need to call each time
+        // store role info/authorities at token so that don't need to call DB each time
         // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 

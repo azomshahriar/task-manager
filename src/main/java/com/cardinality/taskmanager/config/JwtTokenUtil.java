@@ -21,10 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    private static final long serialVersionUID = -2550185165626007488L;
-
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-
+    private static final long serialVersionUID = -255018543562007488L;
 
     public static final Base64.Decoder decoder = Base64.getDecoder();
     public static final ObjectMapper mapper = new ObjectMapper();
@@ -32,6 +29,9 @@ public class JwtTokenUtil implements Serializable {
 
     @Value("${jwt.secret}")
     private String secret;
+
+    @Value("${jwt.token.validity:18000}")
+    private int JWT_TOKEN_VALIDITY;
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {

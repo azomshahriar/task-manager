@@ -56,14 +56,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // We don't need CSRF for this example
+        // Disable CSRF for this example now
         httpSecurity.csrf().disable()
                 // dont authenticate this particular request
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/docs/**").permitAll()
                 .antMatchers("/api/v1/authenticate").permitAll()
-               // .antMatchers("/api/v1/admin/user").permitAll()
                 //admin request
                 .antMatchers("/api/v1/admin/**").hasAuthority(Role.ADMIN.name())
                 // all other requests need to be authenticated
