@@ -43,7 +43,7 @@ Url: localhost:8070/api/v1/authenticate
 
 Method:POST
 
-### Request Body: - 
+ Request Body:- 
 
 {
     "username":"admin",
@@ -59,7 +59,7 @@ User can also pass language header: Accept-Language:en/bn
 URL: localhost:8070/api/v1/task
 Method: POST
     
-### Request: -
+ Request:-
     
 {
     "description":"Sample Task",
