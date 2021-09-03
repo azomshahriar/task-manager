@@ -6,6 +6,7 @@ import com.cardinality.taskmanager.dto.TaskDto;
 import com.cardinality.taskmanager.dto.UserDto;
 import com.cardinality.taskmanager.entity.Project;
 import com.cardinality.taskmanager.entity.Task.Status;
+import com.cardinality.taskmanager.entity.User;
 import com.cardinality.taskmanager.entity.User.Role;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwt;
@@ -299,13 +300,57 @@ class TaskManagerApplicationTests {
 		ResponseEntity<List<TaskDto>> responseEntity =restTemplate.exchange(
 				searchUrl, HttpMethod.GET, request, new ParameterizedTypeReference<List<TaskDto>>() {
 				});
-		responseEntity.getBody().forEach(e->{
-			System.out.println("---------------"+e.getDescription());
-		});
+
 		Assertions.assertEquals(1,responseEntity.getBody().size());;
 
 	}
 
+	@Test
+	@Order(6)
+	public void adminSearchTest() {
+		UserDto userDto1 = getUser(user1);
+		UserDto userDto2 = getUser(user2);
+
+		String taskByUser = this.baseUrl+"/api/v1/admin/task/byUser/";
+		String projectByUser = this.baseUrl+"/api/v1/admin/project/byUser/";
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("Authorization","Bearer "+authToken);
+		HttpEntity<String> request =
+				new HttpEntity<String>(headers);
+		ResponseEntity<RestResponsePage<TaskDto>> responseEntity =restTemplate.exchange(
+				taskByUser+userDto1.getId(), HttpMethod.GET, request, new ParameterizedTypeReference<RestResponsePage<TaskDto>>() {});
+
+		Assertions.assertEquals(1,responseEntity.getBody().getTotalElements());
+
+		responseEntity =restTemplate.exchange(
+				taskByUser+userDto2.getId(), HttpMethod.GET, request, new ParameterizedTypeReference<RestResponsePage<TaskDto>>() {
+				});
+		Assertions.assertEquals(2,responseEntity.getBody().getTotalElements());;
 
 
+		ResponseEntity<RestResponsePage<ProjectDto>> responseEntityP  =restTemplate.exchange(
+				projectByUser+userDto1.getId(), HttpMethod.GET, request, new ParameterizedTypeReference<RestResponsePage<ProjectDto>>() {
+				});
+		Assertions.assertEquals(1,responseEntityP.getBody().getTotalElements());;
+
+		responseEntityP =restTemplate.exchange(
+				projectByUser+userDto2.getId(), HttpMethod.GET, request, new ParameterizedTypeReference<RestResponsePage<ProjectDto>>() {
+				});
+		Assertions.assertEquals(2,responseEntityP.getBody().getTotalElements());;
+
+	}
+
+	private UserDto getUser(String user){
+		String getUserUrl = this.baseUrl+"/api/v1/admin/user/"+user;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("Authorization","Bearer "+authToken);
+		HttpEntity<String> request =
+				new HttpEntity<String>(headers);
+		ResponseEntity<UserDto> responseEntity =restTemplate.exchange(
+				getUserUrl, HttpMethod.GET, request, UserDto.class);
+
+		return responseEntity.getBody();
+	}
 }
