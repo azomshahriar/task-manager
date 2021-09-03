@@ -97,6 +97,7 @@ URL:localhost:8070/api/v1/task/search?expired=true
 - Implement Idempotent operation using idempotent key
 - Code quality check(sonar quebe)  and code style check    
 - incorporate CI/CD pipeline
+- implement Spring cloud config & vault for configuration management    
     
     
     
