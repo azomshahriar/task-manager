@@ -8,7 +8,7 @@ Dependency of this project:
 - Spring boot 2.5.4
 - Maven
 
-### This is a demo of-
+### This demo project can be an example of-
     - basic Spring boot project
     - spring security and authentication & authorization.
     - Error Handling and Error Message
@@ -39,11 +39,11 @@ API Doc:
 
 ### Admin Login:
 
-Url: localhost:8070/api/v1/authenticate
+Url: http://localhost:8070/api/v1/authenticate
 
 Method:POST
 
- Request Body:- 
+ Request Body:
 
 {
     "username":"admin",
@@ -56,7 +56,7 @@ All request need header: Authentiation: Bearer:<token>
 User can also pass language header: Accept-Language:en/bn
 
 ### Create a Task:
-URL: localhost:8070/api/v1/task
+URL: http://localhost:8070/api/v1/task
 Method: POST
     
  Request:-
@@ -70,17 +70,14 @@ Method: POST
 
 ### Task Search:
     
-URL:localhost:8070/api/v1/task/search?expired=true
+URL:http://localhost:8070/api/v1/task/search?expired=true
 
 
 
 ### datasource config
  datasource:
-    
     username: root
-    
     password: password
-    
     url: jdbc:mysql://localhost:3306/task_manager?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
 
 ## More Improvement notes for performance, scalability & maintainability:
