@@ -76,8 +76,11 @@ URL:http://localhost:8070/api/v1/task/search?expired=true
 
 ### datasource config:
  datasource:
+    
     username: root
+    
     password: password
+    
     url: jdbc:mysql://localhost:3306/task_manager?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
 
 ## More Improvement notes for performance, scalability & maintainability:
