@@ -75,8 +75,7 @@ public class TaskServiceImpl implements TaskService {
 
     private void validateUser(Project project){
         if(SecurityUtils.getCurrentUserLogin().isPresent()){
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            User user = userRepository.findByUserName(userName);
+            User user = getSecurityUser();
             if(user!=null){
                 if(user.getId()!=project.getUser().getId()){
                     throw new ElementNotFoundException(
@@ -108,9 +107,7 @@ public class TaskServiceImpl implements TaskService {
         if(SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())){
             taskPage = taskRepository.findAll(pageable);
         }else {
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            User user = userRepository.findByUserName(userName);
-            taskPage= taskRepository.findAllByUser(user,pageable);
+            taskPage= taskRepository.findAllByUser(getSecurityUser(),pageable);
         }
         return taskPage.map(this::adaptTaskDto);
     }
@@ -132,8 +129,7 @@ public class TaskServiceImpl implements TaskService {
 
      void validateSecurityUser(User taskUser){
         if(!SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())) {
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            User user = userRepository.findByUserName(userName);
+            User user =getSecurityUser();
             if(user.getId()!=taskUser.getId()){
                 throw new ElementNotFoundException(
                         TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,
@@ -151,9 +147,7 @@ public class TaskServiceImpl implements TaskService {
         if(SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())){
             taskPage = taskRepository.findAllByDueDateBefore(currentInstant,pageable);
         }else {
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            User user = userRepository.findByUserName(userName);
-            taskPage= taskRepository.findAllByUserAndDueDateBefore(user,currentInstant,pageable);
+            taskPage= taskRepository.findAllByUserAndDueDateBefore(getSecurityUser(),currentInstant,pageable);
         }
         return taskPage.map(this::adaptTaskDto);
 
@@ -214,8 +208,7 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskDto> searchTasks(Long projectId,Boolean expired, Status status){
         User user=null;
         if(!SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())) {
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            user = userRepository.findByUserName(userName);
+            user=getSecurityUser();
         }
         Project project = null;
         if(projectId!=null&&projectId>0){
@@ -226,5 +219,13 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    private User getSecurityUser(){
+        String userName = SecurityUtils.getCurrentUserLogin().get();
+        User user = userRepository.findByUserName(userName);
+        if(user==null)
+            throw new ElementNotFoundException(TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,TaskManErrors.INVALID_USER_CONTEXT),
+                    TaskManErrors.getErrorMessage(TaskManErrors.ERROR_MAP.get(TaskManErrors.INVALID_USER_CONTEXT)));
+        return user;
+    }
 
 }

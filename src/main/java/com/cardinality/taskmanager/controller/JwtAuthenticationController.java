@@ -59,7 +59,9 @@ public class JwtAuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new CommonException(TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,TaskManErrors.USER_DISABLE),
+                    TaskManErrors.getErrorMessage(TaskManErrors.ERROR_MAP.get(TaskManErrors.USER_DISABLE)));
+
         } catch (BadCredentialsException e) {
             throw new CommonException(TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,TaskManErrors.INVALID_CREDENTIALS),
                     TaskManErrors.getErrorMessage(TaskManErrors.ERROR_MAP.get(TaskManErrors.INVALID_CREDENTIALS)));

@@ -46,24 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setDescription(projectDto.getDescription());
         project.setName(projectDto.getName());
         project.setCreatedDate(Instant.now());
-
-        if(SecurityUtils.getCurrentUserLogin().isPresent()){
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            User user = userRepository.findByUserName(userName);
-            if(user!=null)
-               project.setUser(user);
-            else
-                throw new ElementNotFoundException(TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,TaskManErrors.USER_NOT_FOUND),
-                        TaskManErrors.getErrorMessage(TaskManErrors.ERROR_MAP.get(TaskManErrors.USER_NOT_FOUND)));
-
-        }else {
-            throw new ElementNotFoundException(TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,TaskManErrors.USER_NOT_FOUND),
-                    TaskManErrors.getErrorMessage(TaskManErrors.ERROR_MAP.get(TaskManErrors.USER_NOT_FOUND)));
-
-        }
-
-
-
+        project.setUser(getSecurityUser());
         return project;
     }
 
@@ -73,13 +56,18 @@ public class ProjectServiceImpl implements ProjectService {
         if(SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())){
             projectPage = projectRepository.findAll(pageable);
         }else {
-            String userName = SecurityUtils.getCurrentUserLogin().get();
-            User user = userRepository.findByUserName(userName);
-            projectPage= projectRepository.findAllByUser(user,pageable);
+              projectPage= projectRepository.findAllByUser(getSecurityUser(),pageable);
         }
-
         return projectPage.map(this::adaptProjectDto);
+    }
 
+    private User getSecurityUser(){
+        String userName = SecurityUtils.getCurrentUserLogin().get();
+        User user = userRepository.findByUserName(userName);
+        if(user==null)
+            throw new ElementNotFoundException(TaskManErrors.getErrorCode(TaskManErrors.TASK_USER,TaskManErrors.INVALID_USER_CONTEXT),
+                    TaskManErrors.getErrorMessage(TaskManErrors.ERROR_MAP.get(TaskManErrors.INVALID_USER_CONTEXT)));
+        return user;
     }
 
     private ProjectDto adaptProjectDto(Project project){

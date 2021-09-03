@@ -79,10 +79,10 @@ public class TaskController {
     @GetMapping("/search")
     public ResponseEntity<List<TaskDto>> searchTask(
             @RequestParam(value = "projectId",required = false) Long projectId,
-            @RequestParam(value = "expired",required = false,defaultValue = "false") Boolean expired,
+            @RequestParam(value = "expired",required = false) Boolean expired,
             @RequestParam(value = "status",required = false) Status status,
             Pageable pageable){
-        log.info("Get expired Task.");// project,status,duedate
+        log.info("Search Task. Param. ProjectId:{}, Expired:{},Status:{}",projectId,expired,status);// project,status,duedate
         return ResponseEntity.ok(taskService.searchTasks(projectId,expired,status));
     }
 
