@@ -51,7 +51,7 @@ Method:POST
 }
 
 ### NB: 
-All request need header: Authentiation: Bearer:<token>
+All request need header: Authentiation: Bearer: <token> 
     
 User can also pass language header: Accept-Language:en/bn
 
@@ -101,4 +101,4 @@ URL:http://localhost:8070/api/v1/task/search?expired=true
     
     
     
-    ## Thanks and Stay Safe.
+  
