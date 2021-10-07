@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
+		<git-code-format-maven-plugin.version>3.1</git-code-format-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -113,6 +114,36 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.cosium.code</groupId>
+				<artifactId>git-code-format-maven-plugin</artifactId>
+				<version>${git-code-format-maven-plugin.version}</version>
+				<executions>
+					<!-- On commit, format the modified java files -->
+					<execution>
+						<id>install-formatter-hook</id>
+						<goals>
+							<goal>install-hooks</goal>
+						</goals>
+					</execution>
+					<!-- On Maven verify phase, fail if any file
+                    (including unmodified) is badly formatted -->
+					<execution>
+						<id>validate-code-format</id>
+						<goals>
+							<goal>validate-code-format</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<googleJavaFormatOptions>
+						<aosp>true</aosp>
+						<fixImportsOnly>false</fixImportsOnly>
+						<skipSortingImports>false</skipSortingImports>
+						<skipRemovingUnusedImports>false</skipRemovingUnusedImports>
+					</googleJavaFormatOptions>
 				</configuration>
 			</plugin>
 		</plugins>
