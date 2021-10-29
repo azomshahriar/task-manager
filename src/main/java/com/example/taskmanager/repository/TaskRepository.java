@@ -9,8 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface TaskRepository extends JpaRepository<Task, Long>,
-        JpaSpecificationExecutor<Task> {
+public interface TaskRepository extends JpaRepository<Task, Long>, JpaSpecificationExecutor<Task> {
 
     // @EntityGraph("task.project")
     //    @Query(value = "FROM Task AS t LEFT JOIN t.project AS p LEFT JOIN p.user u WHERE u.id

@@ -17,7 +17,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -227,37 +226,51 @@ public class TaskServiceImpl implements TaskService {
             project = projectRepository.findById(projectId).get();
         }
         return null;
-       // List<Task> taskList = taskRepository.searchTask(project, expired, status, user);
-       // return taskList.stream().map(this::adaptTaskDto).collect(Collectors.toList());
+        // List<Task> taskList = taskRepository.searchTask(project, expired, status, user);
+        // return taskList.stream().map(this::adaptTaskDto).collect(Collectors.toList());
     }
 
-    public Page<TaskDto> searchTask(Long projectId, Boolean expired, Status status,Pageable pageable){
+    public Page<TaskDto> searchTask(
+            Long projectId, Boolean expired, Status status, Pageable pageable) {
 
-        Page<Task> page = taskRepository.findAll(new Specification<Task>() {
-            @Override
-            public Predicate toPredicate(
-                    Root<Task> taskRoot, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        Page<Task> page =
+                taskRepository.findAll(
+                        new Specification<Task>() {
+                            @Override
+                            public Predicate toPredicate(
+                                    Root<Task> taskRoot,
+                                    CriteriaQuery<?> query,
+                                    CriteriaBuilder criteriaBuilder) {
 
-                List<Predicate> predicates = new ArrayList<>();
+                                List<Predicate> predicates = new ArrayList<>();
 
-                if (projectId != null && projectId > 0) {
-                    Project project = projectRepository.findById(projectId).get();
-                    if (project != null) {
-                        predicates.add(criteriaBuilder.equal(taskRoot.get("project"), project));
-                    }
-                }
-                if (expired != null && expired) {
-                    predicates.add(criteriaBuilder.lessThan(taskRoot.get("dueDate"), Instant.now()));
-                }
-                if (status != null) {
-                    predicates.add(criteriaBuilder.equal(taskRoot.get("status"), status));
-                }
-                if (!SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())) {
-                    predicates.add(criteriaBuilder.equal(taskRoot.get("user"),  getSecurityUser()));
-                }
-                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
-            }
-        }, pageable);
+                                if (projectId != null && projectId > 0) {
+                                    Project project = projectRepository.findById(projectId).get();
+                                    if (project != null) {
+                                        predicates.add(
+                                                criteriaBuilder.equal(
+                                                        taskRoot.get("project"), project));
+                                    }
+                                }
+                                if (expired != null && expired) {
+                                    predicates.add(
+                                            criteriaBuilder.lessThan(
+                                                    taskRoot.get("dueDate"), Instant.now()));
+                                }
+                                if (status != null) {
+                                    predicates.add(
+                                            criteriaBuilder.equal(taskRoot.get("status"), status));
+                                }
+                                if (!SecurityUtils.hasCurrentUserThisAuthority(Role.ADMIN.name())) {
+                                    predicates.add(
+                                            criteriaBuilder.equal(
+                                                    taskRoot.get("user"), getSecurityUser()));
+                                }
+                                return criteriaBuilder.and(
+                                        predicates.toArray(new Predicate[predicates.size()]));
+                            }
+                        },
+                        pageable);
 
         return page.map(this::adaptTaskDto);
     }

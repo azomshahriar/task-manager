@@ -4,7 +4,6 @@ import com.example.taskmanager.dto.TaskDto;
 import com.example.taskmanager.entity.Task.Status;
 import com.example.taskmanager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
-import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +106,6 @@ public class TaskController {
                 projectId,
                 expired,
                 status); // project,status,duedate
-        return ResponseEntity.ok(taskService.searchTask(projectId, expired, status,pageable));
+        return ResponseEntity.ok(taskService.searchTask(projectId, expired, status, pageable));
     }
 }

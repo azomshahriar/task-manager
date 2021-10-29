@@ -23,5 +23,6 @@ public interface TaskService {
     Page<TaskDto> findTaskByUser(Long userId, Pageable pageable);
 
     List<TaskDto> searchTasks(Long projectId, Boolean expired, Status status);
-    Page<TaskDto> searchTask(Long projectId, Boolean expired, Status status,Pageable pageable);
+
+    Page<TaskDto> searchTask(Long projectId, Boolean expired, Status status, Pageable pageable);
 }
