@@ -16,6 +16,8 @@ Dependency of this project:
     - Basic Unit,Integration and System testing
     - annotation based input validation
     - auditing using spring security
+    - custom search and pagination using Spring Data JPA
+    - Basic Data initializatin at time of application startup
 
 How to test:
   - mvn test
